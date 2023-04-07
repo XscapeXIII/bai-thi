@@ -33,7 +33,7 @@ function ListItem({ name, age, salary, index, id }) {
           salary,
         }}
         onFinish={(values) => {
-          dispatch(editAction((id, values)));
+          dispatch(editAction({ id, values }));
           setIsEdit(false);
         }}
       >
@@ -86,7 +86,12 @@ function ListItem({ name, age, salary, index, id }) {
       <Space>
         {isEdit ? (
           <>
-            <Button key="save" type="primary" onClick={() => editForm.submit()}>
+            <Button
+              key="save"
+              type="primary"
+              htmlType="submit"
+              onClick={() => editForm.submit()}
+            >
               Save
             </Button>
             <Button key="cancel" onClick={() => setIsEdit(false)}>

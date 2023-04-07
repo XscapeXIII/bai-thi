@@ -51,7 +51,10 @@ function App() {
           name="addTodo"
           form={addForm}
           layout="horizontal"
-          onFinish={(values) => dispatch(addAction(values))}
+          onFinish={(values) => {
+            addForm.resetFields();
+            dispatch(addAction(values));
+          }}
         >
           <Form.Item
             label="Name"
