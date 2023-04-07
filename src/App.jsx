@@ -53,7 +53,7 @@ function App() {
           layout="horizontal"
           onFinish={(values) => {
             addForm.resetFields();
-            dispatch(addAction(values));
+            dispatch(addAction({ values }));
           }}
         >
           <Form.Item

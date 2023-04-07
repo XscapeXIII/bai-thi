@@ -108,7 +108,7 @@ function ListItem({ name, age, salary, index, id }) {
             Edit
           </Button>
         )}
-        <Button danger onClick={() => dispatch(removeAction(id))}>
+        <Button danger onClick={() => dispatch(removeAction({ id }))}>
           Remove
         </Button>
       </Space>
