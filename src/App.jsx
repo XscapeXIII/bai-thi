@@ -4,48 +4,40 @@ import { Form, Card, Input, Button } from "antd";
 import ListItem from "./List";
 import { v4 as uuidv4 } from "uuid";
 
-// import { useDispatch, useSelector } from "react-redux";
-// import { addToDoAction } from "./redux/actions/add.action";
+import { useDispatch, useSelector } from "react-redux";
+import { addAction } from "./redux/actions/add.action";
 
 function App() {
-  const [toDoList, setToDoList] = useState([]);
   const [addForm] = Form.useForm();
 
-  const handleAdd = (values, index) => {
-    const newValues = {
-      ...values,
-      id: uuidv4(),
-    };
-    const newList = [...toDoList, newValues];
-    setToDoList(newList);
-  };
+  const dispatch = useDispatch();
+  const { toDoList } = useSelector((state) => state.add);
 
-  const handleEditToDo = (id, values) => {
-    const newToDoList = [...toDoList];
-    const index = toDoList.findIndex((item) => item.id === id);
-    newToDoList.splice(index, 1, values);
-    setToDoList(newToDoList);
-  };
+  // const handleEditToDo = (id, values) => {
+  //   const newToDoList = [...toDoList];
+  //   const index = toDoList.findIndex((item) => item.id === id);
+  //   newToDoList.splice(index, 1, values);
+  //   setToDoList(newToDoList);
+  // };
 
-  const handleRemoveToDo = (id) => {
-    // const newToDoList = toDoList.filter((item) => item.id !== id);
-    const newToDoList = [...toDoList];
-    const index = toDoList.findIndex((item) => item.id === id);
-    newToDoList.splice(index, 1);
-    setToDoList(newToDoList);
-  };
+  // const handleRemoveToDo = (id) => {
+  //   // const newToDoList = toDoList.filter((item) => item.id !== id);
+  //   const newToDoList = [...toDoList];
+  //   const index = toDoList.findIndex((item) => item.id === id);
+  //   newToDoList.splice(index, 1);
+  //   setToDoList(newToDoList);
+  // };
 
   const renderListUser = () => {
-    return toDoList.map((item) => {
+    return toDoList.map((item, index) => {
       return (
         <Fragment key={item.id}>
           <ListItem
+            index={index}
             id={item.id}
             name={item.name}
             age={item.age}
             salary={item.salary}
-            handleEditToDo={handleEditToDo}
-            handleRemoveToDo={handleRemoveToDo}
           />
         </Fragment>
       );
@@ -54,12 +46,12 @@ function App() {
 
   return (
     <div>
-      <Card size="small" style={{ margin: 24 }}>
+      <Card title="USER:" bordered={false} style={{ margin: 25 }} size="small">
         <Form
           name="addTodo"
           form={addForm}
           layout="horizontal"
-          onFinish={(values) => handleAdd(values)}
+          onFinish={(values) => dispatch(addAction(values))}
         >
           <Form.Item
             label="Name"

@@ -17,16 +17,16 @@ const addReducer = createReducer(initialState, {
       toDoList: newToDoList,
     };
   },
-//   EDIT_LIST: (state, action) => {
-//     const { id, values } = action.payload;
-//     const newToDoList = [...state.toDoList];
-//     const index = state.toDoList.findIndex((item) => item.id === id);
-//     newToDoList.splice(index, 1, values);
-//     return {
-//       ...state,
-//       toDoList: newToDoList,
-//     };
-//   },
+  EDIT_LIST: (state, action) => {
+    const { id, values } = action.payload;
+    const newToDoList = [...state.toDoList];
+    const index = state.toDoList.findIndex((item) => item.id === id);
+    newToDoList.splice(index, 1, values);
+    return {
+      ...state,
+      toDoList: newToDoList,
+    };
+  },
   REMOVE_LIST: (state, action) => {
     const { id } = action.payload;
     const newToDoList = [...state.toDoList];
